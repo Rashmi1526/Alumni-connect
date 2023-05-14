@@ -23,7 +23,7 @@ const StudentDetails = () => {
         try {
             const { data } = await axios({
                 method: 'Post',
-                url: 'https://apna-erp.herokuapp.com/api/student/getAllStudents',
+                url: 'http://localhost:5000/api/student/getAllStudents',
                 data: {
                     department,
                     year,
@@ -41,7 +41,7 @@ const StudentDetails = () => {
         try {
             const { data } = await axios({
                 method: 'Post',
-                url: 'https://apna-erp.herokuapp.com/api/student/getStudentByName',
+                url: 'http://localhost:5000/api/student/getStudentByName',
                 data: {
                     name
                 }

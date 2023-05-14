@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http')
 const socket = require('socket.io')
+
 const mongoose = require('mongoose')
 const passport = require('passport')
 const cors = require('cors')
@@ -18,7 +19,7 @@ const { connectDb } = require('./db')
 //MIDDILWARES
 const app = express();
 let server = http.createServer(app);
-let io = socket(server);
+let io = socket(3000);
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(cors())

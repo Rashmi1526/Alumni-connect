@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, Link } from 'react-router-dom'
 import { facultyLogin } from '../redux/action/facultyAction'
 import { studentLogin } from '../redux/action/studentAction'
+import { alumniLogin } from '../redux/action/alumniAction'
 import classnames from 'classnames'
+
+
 
 import '../Style/facultyStudentLogin.css'
 
@@ -17,10 +20,14 @@ const FacultyStudentLoginPags = () => {
     const [facultyPassword, setFacultyPassword] = useState('')
     const [studentRegNum, setStudentRegNum] = useState('')
     const [studentPassword, setStudentPassword] = useState('')
+    const [alumniRegNum, setAlumniRegNum] = useState('');
+    const [alumniPassword, setAlumniPassword] = useState('');
     const [errors, setErrors] = useState({})
     const [errorsHelper, setErrorsHelper] = useState({})
+    // const [errorsAlumni, setErrorsAlumni] = useState({})
     const [isFacultyLoading, setIsFacultyLoading] = useState(false)
     const [isStudentLoading, setIsStudentLoading] = useState(false)
+    const [isAlumniLoading, setIsAlumniLoading] = useState(false)
 
 
     const history = useHistory()
@@ -41,6 +48,17 @@ const FacultyStudentLoginPags = () => {
             history.push('/home')
         }
     }, [store.student.isAuthenticated])
+
+    useEffect(() => {
+        if (store.errorHelper) {
+            setErrorsHelper(store.errorHelper)
+        }
+    }, [store.errorHelper])
+    useEffect(() => {
+        if (store.alumni) {
+            history.push('/Alumni')
+        }
+    }, [store.alumni])
 
     useEffect(() => {
         if (store.errorHelper) {
@@ -88,6 +106,22 @@ const FacultyStudentLoginPags = () => {
         }
 
     }, [store.errorHelper, store.student.isAuthenticated])
+
+    const alumniFormHandler = (e) => {
+        e.preventDefault();
+        setIsAlumniLoading(true);
+        dispatch(alumniLogin({ registrationNumber: alumniRegNum, password: alumniPassword }));
+      };
+      
+    
+      useEffect(() => {
+        if (store.errorHelper 
+        || store.alumni.isAuthenticated) {
+          setIsAlumniLoading(false);
+        } else {
+          setIsAlumniLoading(false);
+        }
+      }, [store.errorHelper, store.alumni])
 
     return (
         <div className="container-fluid">
@@ -137,6 +171,59 @@ const FacultyStudentLoginPags = () => {
                         </div>
                     </div>
                     <div className="row m-5">
+        <div className="col-md-8 m-auto border" style={{ backgroundColor: "white", borderRadius: "1.2rem", padding: "1rem 1rem 0rem 1rem" }}>
+        <div>
+            <h3 className="text-center">ALUMNI</h3>
+            <form noValidate onSubmit={alumniFormHandler}>
+              <div className="form-group">
+                <label htmlFor="alumniRegId">Registration Number</label>
+                <input
+                  onChange={(e) => setAlumniRegNum(e.target.value)}
+                  type="text"
+                  value={alumniRegNum}
+                  className={classnames('form-control', {
+                    'is-invalid': errors.registrationNumber
+                  })}
+                  id="alumniRegId"
+                />
+                {errors.registrationNumber && (
+                  <div className="invalid-feedback">{errors.registrationNumber}</div>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="passwordAlumniId">Password</label>
+                <input
+                  onChange={(e) => setAlumniPassword(e.target.value)}
+                  value={alumniPassword}
+                  className={classnames("form-control", {
+                    'is-invalid': errors.password
+                  })}
+                  type="password"
+                  id="passwordAlumniId"
+                />
+                {errors.password && (
+                  <div className="invalid-feedback">{errors.password}</div>
+                )}
+              </div>
+              <div className="row justify-content-center">
+                <div className="col-md-1">
+                {
+                    isAlumniLoading && <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+               }
+                </div>
+              </div>
+              {!isAlumniLoading && (
+                <button type="submit" className="btn btn-info btn-block">Login</button>
+              )}
+            </form>
+            <p className="text-center mt-2"><Link className="text-center" to="/forgotPassword/alumni">Forgot Password</Link></p>
+          </div>
+        </div>
+      </div>
+    
+                    <div className="row m-5">
                         <div className="col-md-8 m-auto border" style={{ backgroundColor: "white", borderRadius: "1.2rem", padding: "1rem 1rem 0rem 1rem" }}>
                             <div>
                                 <h3 className="text-center">STUDENT</h3>
@@ -177,9 +264,14 @@ const FacultyStudentLoginPags = () => {
                             </div>
                         </div>
                     </div>
+
                 </div>
-            </div>
+                <div className="col-md-6">
+        
+          </div>
         </div>
+            </div>
+        
     )
 }
 

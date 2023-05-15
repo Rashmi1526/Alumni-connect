@@ -1,16 +1,18 @@
 import React,{useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-import HomeHelper from '../Components/HomeHelper'
-
+//import HomeHelper from '../Components/HomeHelper'
+import AlumniHomeHelper from '../Components/AlumniHomeHelper'
 const Alumni = () => {
     const store = useSelector((store) => store)
+    // (store.alumconsole.logni)
     const history = useHistory()
 
     return (
         <div>
-            {store.student.isAuthenticated ? <>
-                <HomeHelper />
+            {store.alumni.isAuthenticated ? <>
+                {/* <HomeHelper /> */}
+                <AlumniHomeHelper />
                 <div className="container">
                     <div className="row">
                         <div className="col-md-2">

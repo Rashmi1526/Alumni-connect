@@ -11,11 +11,11 @@ import { setAdminUser, adminLogout, adminGetAllStudent } from './redux/action/ad
 
 import { setStudentUser, studentLogout } from './redux/action/studentAction'
 
-
+import {setAlumniUser, alumniLogout} from './redux/action/alumniAction'
 import LoginPage from './Pages/LoginPage'
 import Home from './Pages/StudentHome'
 
-
+import AlumniHome from './Pages/AlumniHome'
 import StudentDetails from './Pages/StudentDetails'
 import facultyInterface from './Pages/FacultyInterface'
 import AttendenceFaculty from './Pages/AttendenceFaculty'
@@ -50,6 +50,7 @@ import AdminGetAllStudent from './Pages/Admin/AdminGetAllStudents'
 import AdminGetAllSubject from './Pages/Admin/AdminGetAllSubjects'
 
 import AdminHome from './Pages/Admin/AdminHome'
+import AlumniUpdateProfile from './Pages/AlumniUpdateProfile';
  
 if (window.localStorage.facultyJwtToken) {
   setAuthToken(localStorage.facultyJwtToken);
@@ -77,6 +78,19 @@ else if (window.localStorage.studentJwtToken) {
     window.location.href = '/';
   } 
 }
+else if (window.localStorage.studentJwtToken) {
+  setAuthToken(localStorage.studentJwtToken);
+  const decoded = jwt_decode(localStorage.studentJwtToken);
+
+  store.dispatch(setAlumniUser(decoded));
+
+  // Check for expired token
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    store.dispatch(alumniLogout());
+    window.location.href = '/';
+  } 
+}
 else if (window.localStorage.adminJwtToken) {
   setAuthToken(localStorage.adminJwtToken);
   const decoded = jwt_decode(localStorage.adminJwtToken);
@@ -90,7 +104,7 @@ else if (window.localStorage.adminJwtToken) {
     window.location.href = '/';
   } 
 }
-
+// console.log(store.alumni)
 function App() {
   const store = useSelector((store)=>store)
   return (
@@ -101,10 +115,13 @@ function App() {
           <Route exact path='/adminLogin' component={LoginPage} />
           <Route exact path='/home' component={Home} />
           <Route exact path='/student/updateProfile' component={StudentUpdateProfile} />
+          <Route exact path='/alumni/updateProfile' component={AlumniUpdateProfile}/>
           <Route exact path="/studentDetails" component={StudentDetails} />
           <Route exact path='/faculty' component={facultyInterface} />
           <Route exact path='/attendenceFaculty' component={AttendenceFaculty} />
           <Route exact path='/admin' component={AdminHome} />
+          <Route exact path='/Alumni' component={AlumniHome} />
+
           <Route exact path="/admin/addStudent" component={AdminAddStudent} />
           <Route exact path="/admin/addFaculty" component={AdminAddFaculty} />
           <Route exact path="/admin/addSubject" component={AdminAddSubject} />

@@ -15,6 +15,7 @@ import '../Style/facultyStudentLogin.css'
 
 const FacultyStudentLoginPags = () => {
     const store = useSelector((state) => state)
+    
     const dispatch = useDispatch()
     const [facultyRegNum, setFacultyRegNum] = useState('')
     const [facultyPassword, setFacultyPassword] = useState('')
@@ -54,11 +55,14 @@ const FacultyStudentLoginPags = () => {
             setErrorsHelper(store.errorHelper)
         }
     }, [store.errorHelper])
-    useEffect(() => {
-        if (store.alumni) {
+    useEffect(() => { 
+        
+        if (store.alumni.isAuthenticated) {
             history.push('/Alumni')
         }
-    }, [store.alumni])
+
+    }, [store.alumni.isAuthenticated])
+    
 
     useEffect(() => {
         if (store.errorHelper) {
@@ -113,10 +117,12 @@ const FacultyStudentLoginPags = () => {
         dispatch(alumniLogin({ registrationNumber: alumniRegNum, password: alumniPassword }));
       };
       
-    
+      
       useEffect(() => {
+       
         if (store.errorHelper 
         || store.alumni.isAuthenticated) {
+            
           setIsAlumniLoading(false);
         } else {
           setIsAlumniLoading(false);

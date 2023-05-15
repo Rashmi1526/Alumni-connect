@@ -3,7 +3,7 @@ const passport = require('passport')
 const router = express.Router()
 const upload = require('../utils/multer')
 
-const {  getAllAlumnis, getAlumniByName, alumniLogin,
+const {  getAllAlumni, getAlumniByName, alumniLogin,
     updatePassword, forgotPassword, getAlumniByRegName,
     postOTP, postPrivateChat, getPrivateChat, differentChats,
     previousChats, updateProfile } = require('../controller/alumniController')
@@ -32,7 +32,7 @@ router.get('/chat/previousChats/:senderName', passport.authenticate('jwt', { ses
     
 
 //HELPER ROUTES
-router.post('/getAllAlumnis', passport.authenticate('jwt', { session: false }), getAllAlumnis)
+router.post('/getAllAlumni', passport.authenticate('jwt', { session: false }), getAllAlumni)
 
 router.post('/getAlumniByRegName', passport.authenticate('jwt', { session: false }), getAlumniByRegName)
 

@@ -51,6 +51,8 @@ import AdminGetAllSubject from './Pages/Admin/AdminGetAllSubjects'
 
 import AdminHome from './Pages/Admin/AdminHome'
 import AlumniUpdateProfile from './Pages/AlumniUpdateProfile';
+import AlumniUpdatePassword from './Pages/AlumniUpdatePassword';
+import AlumniDetails from './Pages/AlumniDetails';
  
 if (window.localStorage.facultyJwtToken) {
   setAuthToken(localStorage.facultyJwtToken);
@@ -117,6 +119,7 @@ function App() {
           <Route exact path='/student/updateProfile' component={StudentUpdateProfile} />
           <Route exact path='/alumni/updateProfile' component={AlumniUpdateProfile}/>
           <Route exact path="/studentDetails" component={StudentDetails} />
+          <Route exact path="/alumniDetails" component={AlumniDetails}/>
           <Route exact path='/faculty' component={facultyInterface} />
           <Route exact path='/attendenceFaculty' component={AttendenceFaculty} />
           <Route exact path='/admin' component={AdminHome} />
@@ -132,6 +135,7 @@ function App() {
           <Route exact path="/admin/allSubject" component={AdminGetAllSubject} />
           <Route exact path="/student/attendence" component={StudentAttendencePage} />
           <Route exact path="/student/updatePassword" component={StudentUpdatePassword} />
+          <Route exact path="/alumni/updatePassword" component={AlumniUpdatePassword}/>
           <Route exact path="/student/testPerformance" component={StudentTestPerformace} />
           <Route exact path="/faculty/updatePassword" component={FacultyUpdatePassword} />
           <Route exact path="/faculty/uploadMarks" component={FacultyUploadMarks} />

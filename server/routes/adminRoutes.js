@@ -4,7 +4,7 @@ const passport = require('passport')
 
 const { adminLogin, addFaculty, addStudent,
     addSubject, getAllFaculty, getAllStudents, getAllSubjects,
-    addAdmin,addAlumni,getAllAlumnis,getAllAlumni,
+    addAdmin,addAlumni,getAllAlumni,
     getAllStudent,
     getAllSubject} = require('../controller/adminController')
 
@@ -19,7 +19,7 @@ router.get('/getFaculties', passport.authenticate('jwt', { session: false }), ge
 router.post('/addStudent', passport.authenticate('jwt', { session: false }),addStudent)
 router.get('/getStudents', passport.authenticate('jwt', { session: false }), getAllStudents)
 router.post('/addAlumni', passport.authenticate('jwt', {session: false}), addAlumni)
-router.get('/getAlumnis', passport.authenticate('jwt', {session: false}), getAllAlumnis)
+//router.get('/getAlumnis', passport.authenticate('jwt', {session: false}), getAllAlumnis)
 router.post('/addSubject', passport.authenticate('jwt', { session: false }), addSubject)
 router.get('/getSubjects', passport.authenticate('jwt', { session: false }),getAllSubjects)
 

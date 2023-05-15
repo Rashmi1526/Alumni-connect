@@ -13,6 +13,8 @@ const AlumniUpdateProfile = () => {
     const history = useHistory()
     const [gender, setGender] = useState('')
     const [alumniMobileNumber, setContactNumber] = useState('')
+    const [company, setCompanyName] = useState('')
+    const [designation, setDesignationName] = useState('')
     const [error, setError] = useState({})
     const [avatar, setAvatar] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -37,6 +39,8 @@ const AlumniUpdateProfile = () => {
         formData.append("alumniMobileNumber", alumniMobileNumber)
         formData.append("avatar", avatar)
         formData.append("email", store.alumni.alumni.alumni.email)
+        formData.append("company", store.alumni.alumni.alumni.company)
+        formData.append("designation", store.alumni.alumni.alumni.designation)
         dispatch(alumniUpdate(formData, history))
         setModal(true)
         alert("Kindly login again to see updates")
@@ -45,7 +49,7 @@ const AlumniUpdateProfile = () => {
     }
         return (
             <div>
-                {store.student.isAuthenticated ? <>
+                {store.alumni.isAuthenticated ? <>
                     <AlumniHomeHelper />
                     <div className="container mt-5">
                         <div className="row ">
@@ -64,7 +68,14 @@ const AlumniUpdateProfile = () => {
                                             <option value="Other">Other</option>
                                         </select>
                                     </div>
-                                    
+                                    <div className="form-group">
+                                        <label htmlFor="companyId">Company</label>
+                                        <input onChange={(e) => setCompanyName(e.target.value)} type="text" className="form-control" id="companyId" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="designationId">Designation</label>
+                                        <input onChange={(e) => setDesignationName(e.target.value)} type="text" className="form-control" id="designationId" />
+                                    </div>
                                     <button type="submit" className="btn btn-primary">Update</button>
                                 </form>
                             </div>

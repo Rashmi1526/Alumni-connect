@@ -52,10 +52,10 @@ module.exports = {
 
     },
     
-    getAllAlumnis: async (req, res, next) => {
+    getAllAlumni: async (req, res, next) => {
         try {
-            const { department, year, company } = req.body;
-            const alumnis = await Alumni.find({ department, year, company })
+            const { department, year } = req.body;
+            const alumnis = await Alumni.find({ department, year })
             if (alumnis.length === 0) {
                 return res.status(400).json({ message: "No alumni found" })
             }

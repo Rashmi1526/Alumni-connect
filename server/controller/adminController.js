@@ -358,19 +358,7 @@ module.exports = {
         }
 
     },
-    getAllAlumnis: async (req, res, next) => {
-        try {
-            const { branch, name } = req.body
-            const alumnis = await Alumni.find({})
-            if (alumnis.length === 0) {
-                return res.status(404).json({ message: "No alumnis found" })
-            }
-            res.status(200).json({ result: alumnis })
-        }
-        catch (err) {
-            res.status(400).json({ message: `error in getting all alumni", ${err.message}` })
-        }
-    },
+    
     addFaculty: async (req, res, next) => {
         try {
             const { errors, isValid } = validateFacultyRegisterInput(req.body)

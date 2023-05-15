@@ -59,7 +59,9 @@ const Alumni = () => {
                     </Link>
                   </button>
                 </li>
-                
+                <li className="nav-item">
+                <button type="button" className="btn"><Link to="/alumniDetails"><li>ALUMNI</li></Link></button>
+                </li>
 
                 <li className="nav-item">
                   <button type="button" className="btn">

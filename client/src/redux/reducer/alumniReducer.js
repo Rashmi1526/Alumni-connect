@@ -41,7 +41,7 @@ const alumniReducer = (state = initialState, action) => {
         case "GET_ALUMNI_BY_REG_NUM": {
             return {
                 ...state,
-                regNumStudent: action.payload
+                regNumAlumni: action.payload
             }
         }
         case "GET_PRIVATE_CONVERSATION": {

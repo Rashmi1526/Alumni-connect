@@ -27,7 +27,7 @@ const chatHelp = (data) => {
 
 const getAlumniByRegNameHelper = (data) => {
   return {
-      type: "GET_STUDENT_BY_REG_NUM",
+      type: "GET_ALUMNI_BY_REG_NUM",
       payload: data
   }
 }
@@ -192,6 +192,23 @@ export const getPrivateConversation2 = (roomId) => {
           console.log("Error in sending message", err.message)
       }
   }
+}
+export const getAlumniByRegName = (registrationNumber) => {
+  return async (dispatch) => {
+      try {
+          const { data } = await axios({
+              method: 'Post',
+              url: url + "/api/alumni/getAlumniByRegName",
+              data: { registrationNumber }
+          })
+          dispatch(getAlumniByRegNameHelper(data.result))
+          //console.log(data.result)
+      }
+      catch (err) {
+          console.log('Error in getting alumni by registration number', err.message)
+      }
+  }
+  
 }
 
 export const previousChats = (senderName) => {

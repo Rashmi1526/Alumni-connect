@@ -35,7 +35,7 @@ const AlumniDetails = () => {
             console.log("Error in alumni register action", err.message)
         }
     }
-
+   
     const filterByNameHelper = async () => {
         try {
             const { data } = await axios({
@@ -171,7 +171,7 @@ const AlumniDetails = () => {
                                             <th scope="row">{index + 1}</th>
                                             <td>{obj.registrationNumber}</td>
                                             <td>{obj.name}</td>
-                                            <td><Link to={`/student/${obj.registrationNumber}`}>Explore</Link></td>
+                                            <td><Link to={`/alumni/${obj.registrationNumber}`}>Explore</Link></td>
                                         </tr>
                                     )}
                                 </tbody>

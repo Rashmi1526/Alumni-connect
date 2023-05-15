@@ -53,7 +53,8 @@ import AdminHome from './Pages/Admin/AdminHome'
 import AlumniUpdateProfile from './Pages/AlumniUpdateProfile';
 import AlumniUpdatePassword from './Pages/AlumniUpdatePassword';
 import AlumniDetails from './Pages/AlumniDetails';
- 
+import RecieverAlumniDetails from './Pages/ReceiverAlumniDetails';
+import AlumniChat from './Pages/AlumniChat';
 if (window.localStorage.facultyJwtToken) {
   setAuthToken(localStorage.facultyJwtToken);
   const decoded = jwt_decode(localStorage.facultyJwtToken);
@@ -143,7 +144,9 @@ function App() {
           <Route exact path="/student/getAllSubjects" component={StudentSubjectList} />
           <Route exact path="/forgotPassword/:user" component={ForgotPassword} />
           <Route exact path="/chat/:room" component={Chat} />
+          <Route exact path="/Alumnichat/:room" component={AlumniChat}/>
           <Route exact path="/student/:registrationNumber" component={RecieverUserDetails} />
+          <Route exact path="/alumni/:registrationNumber" component={RecieverAlumniDetails}/>
         </Switch>
       </Router>
     </div>
